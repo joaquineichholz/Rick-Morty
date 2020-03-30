@@ -30,9 +30,8 @@ app = Flask(__name__)
 def hello_world():
     episodes_list = capitulos()
     print(episodes_list)
-    lista = [['a', 'a', 'a'], ['b', 'b', 'b']]
 
-    return render_template('index.html', list=episodes_list)
+    return "Hello wordl "#render_template('index.html', list=episodes_list)
 
 if __name__ == '__main__':
     app.run()
