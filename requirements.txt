@@ -34,7 +34,7 @@ openpyxl==2.4.9
 pandas==0.24.2
 patsy==0.4.1+dev
 pbr==3.1.1
-Pillow==5.1.0
+Pillow==6.2.0
 pluggy==0.6.0
 py==1.5.2
 pycrypto==2.6.1
