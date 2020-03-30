@@ -24,12 +24,14 @@ def capitulos():
         if not first:
             response = requests.get('https://rickandmortyapi.com/api/episode/?page=' + str(pag))
 
-        info.extend(response.json()['results'])
+        for data in response.json()['results']:
+            info.append([data['name'], data['air_date'], data['episode'], data['url']])
 
-        for episode in info:
             print(episode['id'], episode['name'])
 
         first = False
+
+    return info
 
 
 for pag in range(1, pages + 1):
