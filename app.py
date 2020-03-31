@@ -21,7 +21,7 @@ def capitulos():
         first = False
     for episode in response.json()['results']:
         info.append([episode['id'], episode['name'], episode['air_date'], episode['episode'], episode['url']])
-        
+
     return info
 
 
