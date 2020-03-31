@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}</title>
+
+    <style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+</head>
+<body>
+    <h1>{{name}}</h1>
+    <img src={{img}} alt="Trulli" width="500" height="333">
+
+
+<table id="customers">
+
+  <tr>
+    <th>status</th>
+    <th>species</th>
+    <th>type</th>
+    <th>gender</th>
+    <th>origin</th>
+    <th>location</th>
+  </tr>
+  <tr>
+   <td> {{char[0]}} </td>
+   <td> {{char[1]}} </td>
+   <td> {{char[2]}} </td>
+   <td> {{char[3]}} </td>
+   <td> {{char[4]}} </td>
+   <td> {{char[5]}} </td>
+
+
+  </tr>
+</table>
+
+
+<table id="customers">
+
+  <tr>
+    <th>Characters</th>
+  </tr>
+
+    {% for character in characters %}
+
+      <tr>
+
+       <td>  <a href={{ "/character/" + character[0] }} > {{character[1]}}  </a> </td>
+
+      </tr>
+    {%endfor%}
+
+</table>
+
+</body>

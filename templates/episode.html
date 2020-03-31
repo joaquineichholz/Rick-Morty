@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>Rick and Morty</title>
-<style>
+    <title>{{name}}</title>
+
+    <style>
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -30,35 +30,48 @@
   color: white;
 }
 </style>
+
 </head>
 <body>
-
-<h1>  Wadabadabdab  </h1>
+    <h1>{{name}}</h1>
 
 <table id="customers">
 
   <tr>
     <th>id</th>
-    <th>Name</th>
-    <th>Date</th>
-    <th>code</th>
+    <th>Air date</th>
+    <th>episode</th>
+    <th>url</th>
+    <th>created</th>
   </tr>
-  {% for episode in list %}
   <tr>
 
    <td> {{episode[0]}} </td>
-   <td> <a href={{ "/episode/" + episode[4] }} >  {{episode[1]}} </a> </td>
+   <td> {{episode[1]}} </td>
    <td> {{episode[2]}} </td>
    <td> {{episode[3]}} </td>
-
+   <td> {{episode[4]}} </td>
 
   </tr>
-  {%endfor%}
-
-
-
 </table>
 
 
+<table id="customers">
+
+  <tr>
+    <th>Characters</th>
+  </tr>
+
+    {% for character in characters %}
+
+      <tr>
+
+       <td>  <a href= {{ "/character/" + character[0] }} > {{character[1]}}  </a> </td>
+
+      </tr>
+    {%endfor%}
+
+</table>
 
 </body>
+</html>

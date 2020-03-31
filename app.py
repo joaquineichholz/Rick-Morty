@@ -15,20 +15,84 @@ def capitulos():
             response = requests.get('https://rickandmortyapi.com/api/episode/?page=' + str(pag))
 
         for episode in response.json()['results']:
-            info.append([episode['id'], episode['name'], episode['air_date'], episode['episode'], episode['url']])
+            info.append([episode['id'], episode['name'], episode['air_date'], episode['episode'], str(episode['id'])])
 
         first = False
 
     return info
 
+@app.route('/episode/<id_>')
+def episode(id_):
+    print('---------------')
+    url = 'https://rickandmortyapi.com/api/episode/' + id_
+    print(url)
+    response = requests.get(url).json()
+    for x in response['characters']:
+        print(x)
+
+    print(response)
+
+    episode_ = [response['id'], response['air_date'], response['episode'],
+               response['url'], response['created']]
+
+    urls = response['characters']
+
+    characters = []
+
+    for url in urls:
+        resp = requests.get(url).json()
+
+        characters.append([str(resp['id']), resp['name']])
+
+
+    return render_template('episode.html', name=response['name'],
+                           episode=episode_, characters=characters)
+
+
+
+@app.route('/character/<id_>')
+def character(id_):
+    print('---------------')
+    url = 'https://rickandmortyapi.com/api/character/' + id_
+    print(url)
+    response = requests.get(url).json()
+
+    for k, v in response.items():
+        print(k, v)
+        print()
+    episodes = []
+    episodes_ = response['episode']
+    for x in episodes_:
+        episodes.append(x)
+
+
+    character_ = [response['status'], response['species'], response['type'],
+               response['gender'], response['origin']['name'],
+                  response['location']['name']]
+
+    '''urls = response['characters']
+
+    characters = []
+
+    for url in urls:
+        resp = requests.get(url).json()
+
+        characters.append([str(resp['id']), resp['name']])
+        break'''
+
+    return render_template('character.html', name=response['name'],
+                           char=character_, img=response['image'])
+
+
+
 
 
 @app.route('/')
-def hello_world():
-    episodes_list = [[1, 2, 3, 4], [1, 3, 4, 5], [5, 5, 6, 7]]
-
+def run():
     episodes_list = capitulos()
     return render_template('index.html', list=episodes_list)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
