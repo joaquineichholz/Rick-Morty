@@ -27,6 +27,7 @@ def capitulos():
 def hello_world():
     episodes_list = [[1, 2, 3, 4], [1, 3, 4, 5], [5, 5, 6, 7]]
 
+    capitulos()
     return render_template('index.html', list=episodes_list)
 
 if __name__ == '__main__':
