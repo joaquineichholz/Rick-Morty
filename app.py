@@ -18,7 +18,7 @@ def capitulos():
             info.append([episode['id'], episode['name'], episode['air_date'], episode['episode'], episode['url']])
 
         first = False
-   
+
     return info
 
 
