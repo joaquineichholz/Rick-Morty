@@ -49,6 +49,36 @@ def episode(id_):
                            episode=episode_, characters=characters)
 
 
+@app.route('/location/<id_>')
+def location(id_):
+    print('---------------')
+    url = 'https://rickandmortyapi.com/api/location/' + id_
+    print(url)
+    response = requests.get(url).json()
+    for x in response['residents']:
+        print(x)
+
+    print(response)
+
+    location = [response['name'], response['type'],
+                response['dimension']]
+
+    urls = response['residents']
+
+    characters = []
+
+    for url in urls:
+        resp = requests.get(url).json()
+
+        characters.append([str(resp['id']), resp['name']])
+
+
+    return render_template('location.html', name=response['name'],
+                           location=location, characters=characters)
+
+
+
+
 
 @app.route('/character/<id_>')
 def character(id_):
@@ -67,21 +97,22 @@ def character(id_):
 
 
     character_ = [response['status'], response['species'], response['type'],
-               response['gender'], response['origin']['name'],
-                  response['location']['name']]
+               response['gender'],
+          [response['origin']['name'], response['origin']['url'].split('/')[-1]],
+        [response['location']['name'], response['location']['url'].split('/')[-1]]]
 
-    '''urls = response['characters']
+    urls = response['episode']
 
-    characters = []
+    episodes = []
 
     for url in urls:
         resp = requests.get(url).json()
 
-        characters.append([str(resp['id']), resp['name']])
-        break'''
+        episodes.append([str(resp['id']), resp['name']])
+
 
     return render_template('character.html', name=response['name'],
-                           char=character_, img=response['image'])
+                           char=character_, img=response['image'], episodes=episodes)
 
 
 

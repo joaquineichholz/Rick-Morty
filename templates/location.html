@@ -34,30 +34,16 @@
 </head>
 <body>
     <h1>{{name}}</h1>
-    <img src={{img}} alt="Trulli" width="500" height="333">
-
 
 <table id="customers">
 
   <tr>
-    <th>status</th>
-    <th>species</th>
-    <th>type</th>
-    <th>gender</th>
-    <th>origin</th>
-    <th>location</th>
+    <th>Type</th>
+    <th>Dimension</th>
   </tr>
   <tr>
-   <td> {{char[0]}} </td>
-   <td> {{char[1]}} </td>
-   <td> {{char[2]}} </td>
-   <td> {{char[3]}} </td>
-
-   <td>  <a href= {{ "/location/" + char[4][1] }} > {{char[4][0]}}  </a> </td>
-   <td>  <a href= {{ "/location/" + char[5][1] }} > {{char[5][0]}}  </a> </td>
-
-
-
+   <td> {{location[1]}} </td>
+   <td> {{location[2]}} </td>
   </tr>
 </table>
 
@@ -65,14 +51,14 @@
 <table id="customers">
 
   <tr>
-    <th>Episodes</th>
+    <th>Characters</th>
   </tr>
 
-    {% for episode in episodes %}
+    {% for character in characters %}
 
       <tr>
 
-       <td>  <a href= {{ "/episode/" + episode[0] }} > {{episode[1]}}  </a> </td>
+       <td>  <a href= {{ "/character/" + character[0] }} > {{character[1]}}  </a> </td>
 
       </tr>
     {%endfor%}
