@@ -7,24 +7,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-#customers {
+
+
+.search_table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 0;
 }
 
-#customers td, #customers th {
+.search_table td, .search_table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+.search_table tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+.search_table tr:hover {background-color: #ddd;}
 
-#customers th {
+.search_table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -45,6 +48,7 @@ h1 {
 </style>
 
 </head>
+
 <body>
 
 <nav class="navbar navbar-inverse" style="fixed;">
@@ -64,53 +68,27 @@ h1 {
     </form>
   </div>
 </nav>
-<div style="margin-left: 5%;">
-     <img src={{img}} alt="Trulli" width="100" height="100" style="display inline-block: 5%; margin-bottom: 15px;">
-         <h1 style="display: inline-block">Character: {{name}}</h1>
-
-</div>
+    <h1>Busqueda: {{busqueda}}</h1>
 
 
-<table id="customers">
-
-  <tr>
-    <th>status</th>
-    <th>species</th>
-    <th>type</th>
-    <th>gender</th>
-    <th>origin</th>
-    <th>location</th>
-  </tr>
-  <tr>
-   <td> {{char[0]}} </td>
-   <td> {{char[1]}} </td>
-   <td> {{char[2]}} </td>
-   <td> {{char[3]}} </td>
-
-   <td>  <a href= {{ "/location/" + char[4][1] }} > {{char[4][0]}}  </a> </td>
-   <td>  <a href= {{ "/location/" + char[5][1] }} > {{char[5][0]}}  </a> </td>
-
-
-
-  </tr>
-</table>
-
-
-<table id="customers">
-
-  <tr>
+<table class="search_table">
+<tr>
     <th>Episodes</th>
+    <th>Places</th>
+    <th>Characters</th>
+
   </tr>
+  {% for x in lista %}
+  <tr>
+   <td> <a href={{ "/episode/" + x[0] }} >  {{x[1]}} </a> </td>
+   <td> <a href={{ "/episode/" + x[2] }} >  {{x[3]}} </a> </td>
+   <td> <a href={{ "/episode/" + x[4] }} >  {{x[5]}} </a> </td>
 
-    {% for episode in episodes %}
-
-      <tr>
-
-       <td>  <a href= {{ "/episode/" + episode[0] }} > {{episode[1]}}  </a> </td>
-
-      </tr>
-    {%endfor%}
-
+</tr>
+  {%endfor%}
 </table>
+
 
 </body>
+
+</html>
