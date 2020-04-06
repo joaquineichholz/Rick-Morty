@@ -4,18 +4,25 @@ from flask import request
 import requests
 import re
 
+API = "https://integracion-rick-morty-api.herokuapp.com/api/"
 
 app = Flask(__name__)
 
 def capitulos():
-    response = requests.get('https://rickandmortyapi.com/api/episode/')
+    response = requests.get(API + 'episode/')
     pages = response.json()['info']['pages']
+    print(response)
+
+    print("- - - - "*10)
+    print(pages)
     info = []
     first = True
 
+
+
     for pag in range(1, pages + 1):
         if not first:
-            response = requests.get('https://rickandmortyapi.com/api/episode/?page=' + str(pag))
+            response = requests.get(API + 'episode/?page=' + str(pag))
 
         for episode in response.json()['results']:
             info.append([episode['id'], episode['name'], episode['air_date'], episode['episode'], str(episode['id'])])
@@ -25,14 +32,14 @@ def capitulos():
     return info
 
 def chapter_search(key):
-    response = requests.get('https://rickandmortyapi.com/api/episode/')
+    response = requests.get(API + 'episode/')
     pages = response.json()['info']['pages']
     nombres = []
     first = True
 
     for pag in range(1, pages + 1):
         if not first:
-            response = requests.get('https://rickandmortyapi.com/api/episode/?page=' + str(pag))
+            response = requests.get(API + 'episode/?page=' + str(pag))
 
         for episode in response.json()['results']:
             if re.search(key, episode['name'].lower()):
@@ -43,14 +50,14 @@ def chapter_search(key):
     return nombres
 
 def character_search(key):
-    response = requests.get('https://rickandmortyapi.com/api/character/')
+    response = requests.get(API + 'character/')
     pages = response.json()['info']['pages']
     nombres = []
     first = True
 
     for pag in range(1, pages + 1):
         if not first:
-            response = requests.get('https://rickandmortyapi.com/api/character/?page=' + str(pag))
+            response = requests.get(API + 'character/?page=' + str(pag))
 
         for episode in response.json()['results']:
             if re.search(key, episode['name'].lower()):
@@ -61,14 +68,14 @@ def character_search(key):
     return nombres
 
 def location_search(key):
-    response = requests.get('https://rickandmortyapi.com/api/location/?page=1')
+    response = requests.get(API + 'location/?page=1')
     pages = response.json()['info']['pages']
     nombres = []
     first = True
 
     for pag in range(1, pages + 1):
         if not first:
-            response = requests.get('https://rickandmortyapi.com/api/location/?page=' + str(pag))
+            response = requests.get(API + 'location/?page=' + str(pag))
 
         for episode in response.json()['results']:
             print(re.search(key, str(episode['name'])), '  --  ',key, '--> ',episode['name'] )
@@ -83,7 +90,7 @@ def location_search(key):
 @app.route('/episode/<id_>')
 def episode(id_):
     print('---------------')
-    url = 'https://rickandmortyapi.com/api/episode/' + id_
+    url = API + 'episode/' + id_
     print(url)
     response = requests.get(url).json()
     for x in response['characters']:
@@ -102,6 +109,7 @@ def episode(id_):
         resp = requests.get(url).json()
 
         characters.append([str(resp['id']), resp['name']])
+        print(resp['id'], resp['name'])
 
 
     return render_template('episode.html', name=response['name'],
@@ -110,7 +118,7 @@ def episode(id_):
 @app.route('/location/<id_>')
 def location(id_):
     print('---------------')
-    url = 'https://rickandmortyapi.com/api/location/' + id_
+    url = API + 'location/' + id_
     print(url)
     response = requests.get(url).json()
     for x in response['residents']:
@@ -201,7 +209,7 @@ def search():
 @app.route('/character/<id_>')
 def character(id_):
     print('---------------')
-    url = 'https://rickandmortyapi.com/api/character/' + id_
+    url = API + 'character/' + id_
     print(url)
     response = requests.get(url).json()
 
